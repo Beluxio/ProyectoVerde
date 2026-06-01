@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ShoppingCart, Droplets } from "lucide-react";
 import type { Plant } from "@/lib/types";
 import PlantImage from "./PlantImage";
+import FavoriteButton from "./FavoriteButton";
 
 const DIFFICULTY_STYLES: Record<string, string> = {
   facil: "bg-green-100 text-green-700",
@@ -48,6 +49,10 @@ export default function PlantCard({ plant }: PlantCardProps) {
             {DIFFICULTY_LABEL[plant.care_difficulty]}
           </span>
         )}
+        {/* Favorito */}
+        <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+          <FavoriteButton plantId={plant.id} />
+        </div>
       </div>
 
       {/* Info */}
@@ -65,7 +70,6 @@ export default function PlantCard({ plant }: PlantCardProps) {
           {plant.description}
         </p>
 
-        {/* Cuidados rápidos */}
         <div className="flex gap-3 text-xs text-gray-500">
           {plant.care_water && (
             <span className="flex items-center gap-1">
@@ -75,7 +79,6 @@ export default function PlantCard({ plant }: PlantCardProps) {
           )}
         </div>
 
-        {/* Precio y CTA */}
         <div className="flex items-center justify-between mt-1">
           <span className="font-bold text-lg text-green-700">
             ${plant.price.toFixed(2)}
