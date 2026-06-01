@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Next.js
+web/.next/
+web/out/
+web/.swc/
+
+# Env files — NUNCA subir a Git
+.env
+.env.local
+.env.*.local
+web/.env
+web/.env.local
+rag-service/.env
+
+# Python
+rag-service/venv/
+rag-service/__pycache__/
+rag-service/**/__pycache__/
+rag-service/*.egg-info/
+rag-service/.pytest_cache/
+*.pyc
+*.pyo
+
+# Build
+web/dist/
+web/build/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor
+.vscode/settings.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
