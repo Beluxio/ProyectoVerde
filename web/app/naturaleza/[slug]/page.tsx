@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { getArticleBySlug, getPublishedArticles } from "@/lib/supabase";
 import { ArrowLeft, Clock, User, Calendar } from "lucide-react";
 
@@ -8,6 +9,38 @@ export const revalidate = 3600;
 export async function generateStaticParams() {
   const articles = await getPublishedArticles().catch(() => []);
   return articles.map((a) => ({ slug: a.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const article = await getArticleBySlug(slug);
+  if (!article) return {};
+
+  const description = article.excerpt ?? article.content.slice(0, 155);
+  const imageUrl = article.cover_image ?? undefined;
+
+  return {
+    title: `${article.title} | ProyectoVerde`,
+    description,
+    openGraph: {
+      title: `${article.title} | ProyectoVerde`,
+      description,
+      images: imageUrl ? [{ url: imageUrl }] : [],
+      type: "article",
+      publishedTime: article.published_at ?? undefined,
+      authors: [article.author],
+      locale: "es_MX",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description,
+    },
+  };
 }
 
 const CATEGORY_LABELS: Record<string, string> = {

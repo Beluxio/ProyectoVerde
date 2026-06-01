@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import type { Metadata } from "next";
 import { getPlantBySlug, getAllPlants } from "@/lib/supabase";
 import AddToCartButton from "@/components/plantas/AddToCartButton";
 import PlantImage from "@/components/plantas/PlantImage";
@@ -12,6 +13,37 @@ export const revalidate = 3600;
 export async function generateStaticParams() {
   const plants = await getAllPlants().catch(() => []);
   return plants.map((p) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const plant = await getPlantBySlug(slug);
+  if (!plant) return {};
+
+  const description = `${plant.description.slice(0, 155)}...`;
+  const imageUrl = plant.main_image ?? undefined;
+
+  return {
+    title: `${plant.name} | ProyectoVerde`,
+    description,
+    openGraph: {
+      title: `${plant.name} — $${plant.price.toFixed(2)} MXN | ProyectoVerde`,
+      description,
+      images: imageUrl ? [{ url: imageUrl, width: 600, height: 600 }] : [],
+      type: "website",
+      locale: "es_MX",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${plant.name} | ProyectoVerde`,
+      description,
+      images: imageUrl ? [imageUrl] : [],
+    },
+  };
 }
 
 const TABS = [
