@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
+export const runtime = "edge";
+
 const RAG_SERVICE_URL = process.env.RAG_SERVICE_URL ?? "http://localhost:8000";
 
 export async function POST(req: NextRequest) {

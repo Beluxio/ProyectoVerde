@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServiceClient } from "@/lib/supabase";
 
+export const runtime = "edge";
+
 export async function POST(req: NextRequest) {
   try {
     const { email, name } = await req.json();
