@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import type { Metadata } from "next";
-import { getPlantBySlug } from "@/lib/supabase";
+import { getPlantBySlug, getAllPlants } from "@/lib/supabase";
 import AddToCartButton from "@/components/plantas/AddToCartButton";
 import PlantImage from "@/components/plantas/PlantImage";
 import RelatedPlants from "@/components/plantas/RelatedPlants";
