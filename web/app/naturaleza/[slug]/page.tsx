@@ -1,15 +1,10 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getArticleBySlug, getPublishedArticles } from "@/lib/supabase";
+import { getArticleBySlug } from "@/lib/supabase";
 import { ArrowLeft, Clock, User, Calendar } from "lucide-react";
 
 export const runtime = "edge";
-
-export async function generateStaticParams() {
-  const articles = await getPublishedArticles().catch(() => []);
-  return articles.map((a) => ({ slug: a.slug }));
-}
 
 export async function generateMetadata({
   params,

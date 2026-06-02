@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import type { Metadata } from "next";
-import { getPlantBySlug, getAllPlants } from "@/lib/supabase";
+import { getPlantBySlug } from "@/lib/supabase";
 import AddToCartButton from "@/components/plantas/AddToCartButton";
 import PlantImage from "@/components/plantas/PlantImage";
 import RelatedPlants from "@/components/plantas/RelatedPlants";
@@ -9,11 +9,6 @@ import FavoriteButton from "@/components/plantas/FavoriteButton";
 import { Droplets, Sun, Thermometer, Leaf, MapPin, Heart, Bug, Sprout } from "lucide-react";
 
 export const runtime = "edge";
-
-export async function generateStaticParams() {
-  const plants = await getAllPlants().catch(() => []);
-  return plants.map((p) => ({ slug: p.slug }));
-}
 
 export async function generateMetadata({
   params,
