@@ -8,7 +8,7 @@ import RelatedPlants from "@/components/plantas/RelatedPlants";
 import FavoriteButton from "@/components/plantas/FavoriteButton";
 import { Droplets, Sun, Thermometer, Leaf, MapPin, Heart, Bug, Sprout } from "lucide-react";
 
-export const revalidate = 3600;
+export const runtime = "edge";
 
 export async function generateStaticParams() {
   const plants = await getAllPlants().catch(() => []);

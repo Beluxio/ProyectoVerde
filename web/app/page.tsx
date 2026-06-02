@@ -4,7 +4,7 @@ import { getFeaturedPlants, getPublishedArticles } from "@/lib/supabase";
 import PlantCard from "@/components/plantas/PlantCard";
 import NewsletterForm from "@/components/ui/NewsletterForm";
 
-export const revalidate = 3600;
+export const runtime = "edge";
 
 const STATS = [
   { value: "50+", label: "Especies disponibles" },

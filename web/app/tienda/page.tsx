@@ -1,7 +1,7 @@
 import { getAllPlants } from "@/lib/supabase";
 import TiendaClient from "@/components/plantas/TiendaClient";
 
-export const revalidate = 3600;
+export const runtime = "edge";
 
 interface SearchParams {
   categoria?: string;

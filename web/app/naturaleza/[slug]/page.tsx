@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { getArticleBySlug, getPublishedArticles } from "@/lib/supabase";
 import { ArrowLeft, Clock, User, Calendar } from "lucide-react";
 
-export const revalidate = 3600;
+export const runtime = "edge";
 
 export async function generateStaticParams() {
   const articles = await getPublishedArticles().catch(() => []);

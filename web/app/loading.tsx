@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import { PlantGridSkeleton } from "@/components/ui/Skeleton";
 
 export default function HomeLoading() {

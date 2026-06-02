@@ -2,7 +2,7 @@ import Link from "next/link";
 import { getPublishedArticles } from "@/lib/supabase";
 import { ArrowRight, Clock } from "lucide-react";
 
-export const revalidate = 3600;
+export const runtime = "edge";
 
 const CATEGORY_LABELS: Record<string, string> = {
   conservacion: "Conservación",
