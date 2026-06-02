@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import type { Plant, NatureArticle } from "./types";
 
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "https://placeholder.supabase.co";
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "https://oelzlufwnlwwzakbtzhk.supabase.co";
 
 // Cliente anon — para uso en el browser (client components)
 export const supabase = createClient(
