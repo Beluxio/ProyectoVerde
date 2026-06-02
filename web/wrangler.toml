@@ -9,3 +9,6 @@ binding = "ASSETS"
 
 [vars]
 NEXT_PUBLIC_FRONTEND_URL = "https://plantas.beluxio.org"
+NEXT_PUBLIC_SUPABASE_URL = "https://oelzlufwnlwwzakbtzhk.supabase.co"
+NEXT_PUBLIC_WHATSAPP_NUMBER = "525649067533"
+RAG_SERVICE_URL = "http://localhost:8000"
