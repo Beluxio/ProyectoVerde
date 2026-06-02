@@ -1,19 +1,28 @@
 import { createClient } from "@supabase/supabase-js";
 import type { Plant, NatureArticle } from "./types";
 
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "https://oelzlufwnlwwzakbtzhk.supabase.co";
+const SUPABASE_URL = "https://oelzlufwnlwwzakbtzhk.supabase.co";
 
-// Cliente anon — para uso en el browser (client components)
-export const supabase = createClient(
-  SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "placeholder"
-);
+let _publicClient: ReturnType<typeof createClient> | null = null;
 
-// Cliente service role — para Server Components y API routes (nunca va al browser)
+// Cliente anon — lazy, para uso en el browser (client components)
+export const supabase = new Proxy({} as ReturnType<typeof createClient>, {
+  get(_, prop) {
+    if (!_publicClient) {
+      _publicClient = createClient(
+        SUPABASE_URL,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? ""
+      );
+    }
+    return (_publicClient as Record<string, unknown>)[prop as string];
+  },
+});
+
+// Cliente service role — lazy, para Server Components y API routes
 function getServiceClient() {
   return createClient(
     SUPABASE_URL,
-    process.env.SUPABASE_SERVICE_ROLE_KEY ?? "placeholder"
+    process.env.SUPABASE_SERVICE_ROLE_KEY ?? ""
   );
 }
 
