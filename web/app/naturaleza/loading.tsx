@@ -1,5 +1,3 @@
-export const runtime = "edge";
-
 import { ArticleCardSkeleton } from "@/components/ui/Skeleton";
 
 export default function NaturalezaLoading() {

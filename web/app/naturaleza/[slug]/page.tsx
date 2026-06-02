@@ -4,8 +4,6 @@ import type { Metadata } from "next";
 import { getArticleBySlug } from "@/lib/supabase";
 import { ArrowLeft, Clock, User, Calendar } from "lucide-react";
 
-export const runtime = "edge";
-
 export async function generateMetadata({
   params,
 }: {

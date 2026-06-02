@@ -1,5 +1,3 @@
-export const runtime = "edge";
-
 import Link from "next/link";
 import { Leaf, ArrowLeft } from "lucide-react";
 
