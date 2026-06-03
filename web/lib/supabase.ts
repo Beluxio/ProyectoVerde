@@ -3,20 +3,16 @@ import type { Plant, NatureArticle } from "./types";
 
 const SUPABASE_URL = "https://oelzlufwnlwwzakbtzhk.supabase.co";
 
-let _publicClient: ReturnType<typeof createClient> | null = null;
+// Cliente anon — para uso en el browser (client components)
+export function getPublicClient() {
+  return createClient(
+    SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? ""
+  );
+}
 
-// Cliente anon — lazy, para uso en el browser (client components)
-export const supabase = new Proxy({} as ReturnType<typeof createClient>, {
-  get(_, prop) {
-    if (!_publicClient) {
-      _publicClient = createClient(
-        SUPABASE_URL,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? ""
-      );
-    }
-    return (_publicClient as Record<string, unknown>)[prop as string];
-  },
-});
+// Alias para compatibilidad con código existente que usa `supabase.from(...)`
+export const supabase = getPublicClient();
 
 // Cliente service role — lazy, para Server Components y API routes
 function getServiceClient() {
